@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RegisterActivity" >
+    tools:context=".ui.registro.RegisterActivity" >
 
     <ImageView
         android:id="@+id/imageView2"
@@ -51,7 +51,9 @@
             android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password_text" />
+            android:hint="@string/password_text"
+            android:inputType="textPassword"/>/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -69,7 +71,8 @@
             android:id="@+id/rep_password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/rep_password_text" />
+            android:hint="@string/rep_password_text"
+            android:inputType="textPassword"/>/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

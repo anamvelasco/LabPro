@@ -1,4 +1,4 @@
-package com.ana.labpro.ui.login
+package com.ana.labpro.ui.registro
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,20 +6,22 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ana.labpro.databinding.ActivityLoginBinding
+import com.ana.labpro.databinding.ActivityRegisterBinding
+import com.ana.labpro.ui.login.LoginActivity
 import com.ana.labpro.ui.registro.RegisterActivity
 import com.ana.labpro.ui.navdrawer.NavigationDrawerActivity
 import com.google.android.material.snackbar.Snackbar
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var activityLoginBinding: ActivityLoginBinding
-    private lateinit var loginViewModel: LoginViewModel
+class RegisterActivity : AppCompatActivity() {
+    private lateinit var activityRegisterBinding: ActivityRegisterBinding
+    private lateinit var registerViewModel: RegisterViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
-        val view = activityLoginBinding.root
+        activityRegisterBinding = ActivityRegisterBinding.inflate(layoutInflater)
+        val view = activityRegisterBinding.root
         setContentView(view)
 
-        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        registerViewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
         val banLoginObserver = Observer<Boolean>{banLogin ->
             if (banLogin){
@@ -29,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        loginViewModel.banLogin.observe(this,banLoginObserver)
+        registerViewModel.banLogin.observe(this,banLoginObserver)
 
 
         val errorMsgObserver = Observer<String>{errorMsg ->
@@ -38,15 +40,15 @@ class LoginActivity : AppCompatActivity() {
                 .show()
         }
 
-        loginViewModel.errorMsg.observe(this,errorMsgObserver)
+        registerViewModel.errorMsg.observe(this,errorMsgObserver)
 
 
-        activityLoginBinding.loginButton.setOnClickListener {
-            loginViewModel.validateData(activityLoginBinding.emailLoginEditText.text.toString(),
-                activityLoginBinding.passwordLoginEditText.text.toString())
+        activityRegisterBinding.registerButton.setOnClickListener {
+            registerViewModel.validateData(activityRegisterBinding.emailEditText.text.toString(),
+                activityRegisterBinding.passwordEditText.text.toString())
         }
-        activityLoginBinding.regisButton.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+        activityRegisterBinding.registerButton.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
