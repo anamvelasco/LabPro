@@ -13,10 +13,11 @@
         android:theme="@style/Theme.LabPro"
         tools:targetApi="31">
         <activity
-            android:name=".ui.navdrawer.NavigationDrawerActivity"
-            android:exported="true"
-            android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/Theme.LabPro.NoActionBar">
+            android:name=".ui.RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,12 +25,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.navdrawer.NavigationDrawerActivity"
+            android:exported="true"
+            android:label="@string/title_activity_navigation_drawer"
+            android:theme="@style/Theme.LabPro.NoActionBar" />
+        <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".ui.bottom.BoottomNavigationActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

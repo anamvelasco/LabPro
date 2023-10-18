@@ -48,4 +48,7 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="name_app_text">LabProApp</string>
+    <string name="welcome_text">¡Bienvenidos a LabProApp!</string>
+    <string name="login_text">Ingresar</string>
+    <string name="register_text">Registrarse</string>
 </resources>
