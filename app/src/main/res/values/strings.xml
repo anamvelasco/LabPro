@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">LabProApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="correo_text">Ingrese su correo electrónico</string>
+    <string name="password_text">Ingrese una contraseña</string>
+    <string name="about_name_text">Sobre nosotros</string>
+    <string name="horario_name_text">Horario</string>
+    <string name="historial_name_text">Historial de Reservas</string>
+    <string name="perfil_name_text">Perfil</string>
+    <string name="reservas_name_text">Reservas</string>
+    <string name="rep_password_text">Repita su contraseña</string>
+    <string name="registrar_button_text">Registrarse</string>
+    <string name="password_login_text">Ingrese su contraseña</string>
+    <string name="login_button_text">Iniciar sesión</string>
+    <string name="title_activity_boottom_navigation">BoottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="about_text">El Laboratorio de Prototipado de la Universidad de Antioquia fue abierto el 28 de Agosto de 2023.\nEste espacio permite a las personas crear prototipos y desarrollar proyectos de manera tangible. \nBusca fomentar la creatividad, la innovación y el aprendizaje práctico</string>
+    <string name="title_horario_name">HORARIO LABORATORIO DE PROTOTIPADO</string>
+    <string name="historial_text">HISTORIAL DE RESERVAS</string>
+    <string name="reserva1_text">Reserva: Máquina 3D\nFecha: 30 de Agosto 2023</string>
+    <string name="reserva2_text">Reserva: Máquina Cortadora Láser\nFecha: 12 de Septiembre 2023</string>
+    <string name="name_text">Nombres:\nAna María</string>
+    <string name="lastname_text">Apellidos: \nVelasco Montenegro</string>
+    <string name="programa_text">Programa Académico: \nIngeniería Electrónica</string>
+    <string name="numero_reservas_text">Número de Reservas: \n10</string>
+    <string name="emailp_text">Correo electrónico:\nana.velasco@udea.edu.co</string>
+    <string name="cedula_text">Cédula:\n1152712240</string>
+    <string name="reservas_title">RESERVAS LABORATORIO DE PROTOTIPADO</string>
+    <string name="name_reserva_text">Ingrese su nombre</string>
+    <string name="cedula_reserva_text">Ingrese su número de cédula</string>
+    <string name="email_reserva_text">Ingrese su email</string>
+    <string name="programa_academico_reserva_text">Ingrese su programa académico</string>
+    <string name="maquina_reserva_text">Nombre de la máquina a reservar</string>
+    <string name="fecha_reserva_text">Fecha de la reserva</string>
+    <string name="reservar_button_text">Reservar</string>
+    <string name="title_activity_navigation_drawer">LabProApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="name_app_text">LabProApp</string>
+</resources>

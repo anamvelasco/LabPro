@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_about">
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="com.ana.labpro.ui.about.AboutFragment"
+        android:label="@string/about_name_text"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/navigation_horario"
+        android:name="com.ana.labpro.ui.agenda.AgendaFragment"
+        android:label="@string/horario_name_text"
+        tools:layout="@layout/fragment_agenda" />
+    <fragment
+        android:id="@+id/navigation_reservas"
+        android:name="com.ana.labpro.ui.reservas.ReservasFragment"
+        android:label="@string/reservas_name_text"
+        tools:layout="@layout/fragment_reservas" />
+    <fragment
+        android:id="@+id/navigation_perfil"
+        android:name="com.ana.labpro.ui.perfil.PerfilFragment"
+        android:label="@string/perfil_name_text"
+        tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/navigation_historial"
+        android:name="com.ana.labpro.ui.historial.HistorialFragment"
+        android:label="@string/historial_name_text"
+        tools:layout="@layout/fragment_historial" />
+</navigation>

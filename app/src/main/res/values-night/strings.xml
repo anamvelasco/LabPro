@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="correo_text">Ingrese su correo electrónico</string>
+    <string name="password_text">Ingrese una contraseña</string>
+    <string name="rep_password_text">Repita su contraseña</string>
+    <string name="password_login_text">Ingrese su contraseña</string>
+    <string name="login_button_text">Iniciar sesión</string>
+    <string name="about_text">El Laboratorio de Prototipado de la Universidad de Antioquia fue abierto el 28 de Agosto de 2023.\nEste espacio permite a las personas crear prototipos y desarrollar proyectos de manera tangible. \nBusca fomentar la creatividad, la innovación y el aprendizaje práctico</string>
+    <string name="historial_text">HISTORIAL DEL RESERVAS</string>
+    <string name="reserva1_text">Reserva: Máquina 3D\nFecha: 30 de Agosto 2023</string>
+    <string name="reserva2_text">Reserva: Máquina Cortadora Láser\nFecha: 12 de Septiembre 2023</string>
+    <string name="name_text">Nombre:\nAna María</string>
+    <string name="lastname_text">Apellidos: Velasco Montenegro</string>
+    <string name="numero_reservas_text">Número de Reservas: 10</string>
+    <string name="emailp_text">Correo electrónico:\nana.velasco@udea.edu.co</string>
+    <string name="reservas_title">RESERVAS LABORATORIO DE PROTOTIPADO</string>
+    <string name="name_reserva_text">Ingrese su nombre</string>
+    <string name="email_reserva_text">Ingrese su email</string>
+    <string name="programa_academico_reserva_text">Ingrese su programa académico</string>
+    <string name="reservar_button_text">Reservar</string>
+</resources>
