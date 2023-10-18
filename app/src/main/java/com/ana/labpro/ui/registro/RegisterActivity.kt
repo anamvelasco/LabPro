@@ -5,16 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ana.labpro.databinding.ActivityLoginBinding
 import com.ana.labpro.databinding.ActivityRegisterBinding
 import com.ana.labpro.ui.login.LoginActivity
-import com.ana.labpro.ui.registro.RegisterActivity
 import com.ana.labpro.ui.navdrawer.NavigationDrawerActivity
 import com.google.android.material.snackbar.Snackbar
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var activityRegisterBinding: ActivityRegisterBinding
     private lateinit var registerViewModel: RegisterViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityRegisterBinding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -23,35 +22,34 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
-        val banLoginObserver = Observer<Boolean>{banLogin ->
-            if (banLogin){
+        val banRegisterObserver = Observer<Boolean> { banRegister ->
+            if (banRegister) {
                 val intent = Intent(this, NavigationDrawerActivity::class.java)
                 startActivity(intent)
                 finish()
             }
         }
 
-        registerViewModel.banLogin.observe(this,banLoginObserver)
+        registerViewModel.banRegister.observe(this, banRegisterObserver)
 
-
-        val errorMsgObserver = Observer<String>{errorMsg ->
-            Snackbar.make(view,errorMsg, Snackbar.LENGTH_INDEFINITE)
-                .setAction("Continuar"){}
+        val errorMsgObserver = Observer<String> { errorMsg ->
+            Snackbar.make(view, errorMsg, Snackbar.LENGTH_INDEFINITE)
+                .setAction("Continuar") {}
                 .show()
         }
 
-        registerViewModel.errorMsg.observe(this,errorMsgObserver)
-
+        registerViewModel.errorMsg.observe(this, errorMsgObserver)
 
         activityRegisterBinding.registerButton.setOnClickListener {
-            registerViewModel.validateData(activityRegisterBinding.emailEditText.text.toString(),
-                activityRegisterBinding.passwordEditText.text.toString())
-        }
-        activityRegisterBinding.registerButton.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
+            val email = activityRegisterBinding.emailEditText.text.toString()
+            val password = activityRegisterBinding.passwordEditText.text.toString()
+            val repeatPassword = activityRegisterBinding.repPasswordEditText.text.toString()
 
-
+            if (email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()) {
+                registerViewModel.validateData(email, password, repeatPassword)
+            } else {
+                Snackbar.make(view, "Por favor, completa todos los campos", Snackbar.LENGTH_SHORT).show()
+            }
+        }
     }
 }
