@@ -51,4 +51,5 @@
     <string name="welcome_text">¡Bienvenidos a LabProApp!</string>
     <string name="login_text">Ingresar</string>
     <string name="register_text">Registrarse</string>
+    <string name="inicio_text">INICIO</string>
 </resources>

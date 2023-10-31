@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ana.labpro.databinding.ActivityRegisterBinding
-import com.ana.labpro.ui.login.LoginActivity
 import com.ana.labpro.ui.navdrawer.NavigationDrawerActivity
 import com.google.android.material.snackbar.Snackbar
 
@@ -32,10 +31,12 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel.banRegister.observe(this, banRegisterObserver)
 
-        val errorMsgObserver = Observer<String> { errorMsg ->
-            Snackbar.make(view, errorMsg, Snackbar.LENGTH_INDEFINITE)
-                .setAction("Continuar") {}
-                .show()
+        val errorMsgObserver = Observer<String?> { errorMsg ->
+            errorMsg?.let {
+                Snackbar.make(view, it, Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Continuar") {}
+                    .show()
+            }
         }
 
         registerViewModel.errorMsg.observe(this, errorMsgObserver)

@@ -3,6 +3,11 @@ package com.ana.labpro.ui.registro
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.ana.labpro.data.ResourceRemote
+import com.ana.labpro.data.UserRepository
+import emailValidator
+import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
 
@@ -10,8 +15,10 @@ class RegisterViewModel : ViewModel() {
         MutableLiveData<Boolean>()
     }
 
-    private val _errorMsg: MutableLiveData<String> = MutableLiveData()
-    val errorMsg: LiveData<String> = _errorMsg
+    private val userRepository = UserRepository()
+
+    private val _errorMsg: MutableLiveData<String?> = MutableLiveData()
+    val errorMsg: LiveData<String?> = _errorMsg
 
     fun validateData(email: String, password: String, repeatPassword: String) {
         if (email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()){
@@ -21,7 +28,41 @@ class RegisterViewModel : ViewModel() {
             _errorMsg.value = "Las contraseñas no coinciden"
             banRegister.value = false
         } else {
-            banRegister.value = true
+            if (password.length < 6){
+                _errorMsg.value = "Las contraseña debe tener mínimo 6 dígitos"
+                //banRegister.value = true
+            }
+            else{
+                if(!emailValidator(email)){
+                    _errorMsg.value = "El correo electrónico está mal escrito, revise su formato"
+                }
+                else {
+                    viewModelScope.launch {
+                        var result = userRepository.registerUser(email, password)
+                        result.let { resourceRemote ->
+                            when (resourceRemote){
+                                is ResourceRemote.Success -> {
+                                    _errorMsg.postValue("Usuario creado exitosamente")
+                                    banRegister.value = true
+                                }
+                                is ResourceRemote.Error -> {
+                                    var msg = result.message
+                                    when(msg){
+                                       "The email address is already in use by another account."-> msg = "Ya existe una cuenta con ese correo electrónico"
+                                        "A network error (such as timeout, interrupted connection or unreachable host) has occurred." -> msg = "Revise su conexión de red"
+                                    }
+                                    _errorMsg.postValue(msg)
+                                }
+                                else -> {
+                                    //don't use
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 }

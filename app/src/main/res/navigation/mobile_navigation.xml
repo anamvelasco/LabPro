@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_about">
+    app:startDestination="@id/navigation_homee">
+
+
     <fragment
         android:id="@+id/navigation_about"
         android:name="com.ana.labpro.ui.about.AboutFragment"
@@ -29,4 +31,9 @@
         android:name="com.ana.labpro.ui.historial.HistorialFragment"
         android:label="@string/historial_name_text"
         tools:layout="@layout/fragment_historial" />
+    <fragment
+        android:id="@+id/navigation_homee"
+        android:name="com.ana.labpro.ui.homee.HomeeFragment"
+        android:label="fragment_homee"
+        tools:layout="@layout/fragment_homee" />
 </navigation>
