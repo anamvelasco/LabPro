@@ -20,6 +20,9 @@ class RegisterViewModel : ViewModel() {
     private val _errorMsg: MutableLiveData<String?> = MutableLiveData()
     val errorMsg: LiveData<String?> = _errorMsg
 
+    private val _registerSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    val registerSuccess: LiveData<Boolean> = _registerSuccess
+
     fun validateData(email: String, password: String, repeatPassword: String) {
         if (email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()){
             _errorMsg.value = "Debe escribir todos los datos de registro"
@@ -42,8 +45,9 @@ class RegisterViewModel : ViewModel() {
                         result.let { resourceRemote ->
                             when (resourceRemote){
                                 is ResourceRemote.Success -> {
+                                    _registerSuccess.postValue(true)
                                     _errorMsg.postValue("Usuario creado exitosamente")
-                                    banRegister.value = true
+                                    //banRegister.value = true
                                 }
                                 is ResourceRemote.Error -> {
                                     var msg = result.message

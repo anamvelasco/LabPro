@@ -41,6 +41,10 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel.errorMsg.observe(this, errorMsgObserver)
 
+        registerViewModel.registerSuccess.observe(this){
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         activityRegisterBinding.registerButton.setOnClickListener {
             val email = activityRegisterBinding.emailEditText.text.toString()
             val password = activityRegisterBinding.passwordEditText.text.toString()

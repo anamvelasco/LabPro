@@ -16,10 +16,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         val view = activityLoginBinding.root
         setContentView(view)
 
-        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
 
         val banLoginObserver = Observer<Boolean>{banLogin ->
             if (banLogin){
