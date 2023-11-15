@@ -42,6 +42,7 @@ class LoginViewModel: ViewModel() {
                                 when(msg){
                                     "The email address is already in use by another account."-> msg = "Ya existe una cuenta con ese correo electrónico"
                                     "A network error (such as timeout, interrupted connection or unreachable host) has occurred." -> msg = "Revise su conexión de red"
+                                    "An internal error has occurred. [ INVALID_LOGIN_CREDENTIALS ]" -> msg = "Correo electrónico o contraseña inválida"
                                 }
                                 _errorMsg.postValue(msg)
                             }
@@ -66,6 +67,10 @@ class LoginViewModel: ViewModel() {
     val _errorMsg: MutableLiveData<String> = MutableLiveData()
     val errorMsg: LiveData<String> = _errorMsg
 
+    /*
+    private val _errorMsg: MutableLiveData<String?> = MutableLiveData()
+    val errorMsg: LiveData<String?> = _errorMsg
+     */
 
 
 }

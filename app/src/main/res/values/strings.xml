@@ -51,5 +51,25 @@
     <string name="welcome_text">¡Bienvenidos a LabProApp!</string>
     <string name="login_text">Ingresar</string>
     <string name="register_text">Registrarse</string>
-    <string name="inicio_text">INICIO</string>
+    <string name="inicio_text">PROYECTOS</string>
+    <string name="field">*Campo obligatorio</string>
+    <string name= "hora_reserva_text">Hora</string>
+
+
+    <string-array name="maquina_options">
+        <item>Impresora 3D Artillery Sidewinder</item>
+        <item>Impresora 3D Creatly Ender 3 V2</item>
+        <item>Cortadora Láser</item>
+        <item>CNC</item>
+    </string-array>
+
+    <string-array name="programa_options">
+        <item>Ingeniería electrónica</item>
+        <item>Ingeniería eléctrica</item>
+        <item>BioIngeniería</item>
+        <item>Ingeniería Mecánica</item>
+        <item>Ingeniería de Sistemas</item>
+        <item>Artes</item>
+        <item>Física</item>
+    </string-array>
 </resources>

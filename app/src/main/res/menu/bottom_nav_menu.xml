@@ -8,22 +8,27 @@
 
     <item
         android:id="@+id/navigation_about"
-        android:title="@string/about_name_text" />
+        android:title="@string/about_name_text"
+        android:icon="@drawable/informaciones"/>
 
     <item
         android:id="@+id/navigation_horario"
-        android:title="@string/horario_name_text" />
+        android:title="@string/horario_name_text"
+        android:icon="@drawable/calendario"/>
 
     <item
         android:id="@+id/navigation_reservas"
-        android:title="@string/reservas_name_text" />
+        android:title="@string/reservas_name_text"
+        android:icon="@drawable/reservan"/>
 
     <item
         android:id="@+id/navigation_historial"
-        android:title="@string/historial_name_text" />
+        android:title="@string/historial_name_text"
+        android:icon="@drawable/historialr"/>
 
     <item
         android:id="@+id/navigation_perfil"
-        android:title="@string/perfil_name_text" />
+        android:title="@string/perfil_name_text"
+        android:icon="@drawable/user"/>
 
 </menu>

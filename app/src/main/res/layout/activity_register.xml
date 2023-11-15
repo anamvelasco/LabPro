@@ -33,7 +33,8 @@
             android:id="@+id/email_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/correo_text" />
+            android:hint="@string/correo_text"
+            android:inputType="text|textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -45,7 +46,8 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_input">
+        app:layout_constraintTop_toBottomOf="@+id/email_input"
+        app:endIconMode= "password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_edit_text"
@@ -65,7 +67,8 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_input">
+        app:layout_constraintTop_toBottomOf="@+id/password_input"
+        app:endIconMode= "password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/rep_password_edit_text"

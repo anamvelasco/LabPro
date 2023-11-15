@@ -1,11 +1,13 @@
 package com.ana.labpro.ui.registro
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ana.labpro.data.ResourceRemote
 import com.ana.labpro.data.UserRepository
+import com.ana.labpro.model.User
 import emailValidator
 import kotlinx.coroutines.launch
 
@@ -45,8 +47,12 @@ class RegisterViewModel : ViewModel() {
                         result.let { resourceRemote ->
                             when (resourceRemote){
                                 is ResourceRemote.Success -> {
-                                    _registerSuccess.postValue(true)
-                                    _errorMsg.postValue("Usuario creado exitosamente")
+                                    var uid = result.data
+                                    uid?.let { Log.d("uid User", it) }
+                                    val user = User(uid, email)
+                                    createUser(user)
+                                    //_registerSuccess.postValue(true)
+                                    //_errorMsg.postValue("Usuario creado exitosamente")
                                     //banRegister.value = true
                                 }
                                 is ResourceRemote.Error -> {
@@ -68,5 +74,28 @@ class RegisterViewModel : ViewModel() {
             }
 
         }
+    }
+
+    private fun createUser(user: User) {
+        viewModelScope.launch {
+            val result = userRepository.createUser(user)
+            result.let {resourceRemote ->
+                when(resourceRemote){
+                    is ResourceRemote.Success ->{
+                        _registerSuccess.postValue(true)
+                        _errorMsg.postValue("Usuario creado exitosamente")
+                    }
+                    is ResourceRemote.Error ->{
+                        var msg = result.message
+                        _errorMsg.postValue(msg)
+                    }
+                    else ->{
+                        //don't use
+                    }
+                }
+
+            }
+        }
+
     }
 }

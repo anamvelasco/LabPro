@@ -45,14 +45,15 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_login_input">
+        app:layout_constraintTop_toBottomOf="@+id/email_login_input"
+        app:endIconMode= "password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_login_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password_login_text"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

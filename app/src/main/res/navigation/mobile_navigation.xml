@@ -6,6 +6,7 @@
     app:startDestination="@id/navigation_homee">
 
 
+
     <fragment
         android:id="@+id/navigation_about"
         android:name="com.ana.labpro.ui.about.AboutFragment"
@@ -34,6 +35,6 @@
     <fragment
         android:id="@+id/navigation_homee"
         android:name="com.ana.labpro.ui.homee.HomeeFragment"
-        android:label="fragment_homee"
+        android:label="Inicio"
         tools:layout="@layout/fragment_homee" />
 </navigation>
