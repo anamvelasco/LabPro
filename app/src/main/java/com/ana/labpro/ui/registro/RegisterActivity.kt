@@ -1,11 +1,12 @@
 package com.ana.labpro.ui.registro
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ana.labpro.databinding.ActivityRegisterBinding
+import com.ana.labpro.model.User
 import com.ana.labpro.ui.navdrawer.NavigationDrawerActivity
 import com.google.android.material.snackbar.Snackbar
 
@@ -41,7 +42,7 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel.errorMsg.observe(this, errorMsgObserver)
 
-        registerViewModel.registerSuccess.observe(this){
+        registerViewModel.registerSuccess.observe(this) {
             onBackPressedDispatcher.onBackPressed()
         }
 
@@ -50,8 +51,13 @@ class RegisterActivity : AppCompatActivity() {
             val password = activityRegisterBinding.passwordEditText.text.toString()
             val repeatPassword = activityRegisterBinding.repPasswordEditText.text.toString()
 
+            val name = activityRegisterBinding.nameEditText.text.toString()
+            val lastName = activityRegisterBinding.lastNameEditText.text.toString()
+            val cedula = activityRegisterBinding.cedulaEditText.text.toString()
+            val programa = activityRegisterBinding.programaSpinner.selectedItem.toString()
+
             if (email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()) {
-                registerViewModel.validateData(email, password, repeatPassword)
+                registerViewModel.validateData(email, password, repeatPassword, name, lastName, cedula, programa)
             } else {
                 Snackbar.make(view, "Por favor, completa todos los campos", Snackbar.LENGTH_SHORT).show()
             }

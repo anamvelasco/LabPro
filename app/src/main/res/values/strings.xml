@@ -54,6 +54,9 @@
     <string name="inicio_text">PROYECTOS</string>
     <string name="field">*Campo obligatorio</string>
     <string name= "hora_reserva_text">Hora</string>
+    <string name="name_edit_text">Ingrese su nombre</string>
+    <string name="last_name_text">Ingrese su apellido</string>
+    <string name="cedula_edit_text">Ingrese su cédula</string>
 
 
     <string-array name="maquina_options">

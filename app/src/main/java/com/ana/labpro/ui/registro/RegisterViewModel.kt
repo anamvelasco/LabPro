@@ -13,11 +13,11 @@ import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
 
-    val banRegister : MutableLiveData<Boolean> by lazy {
+    private val userRepository = UserRepository()
+
+    val banRegister: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
     }
-
-    private val userRepository = UserRepository()
 
     private val _errorMsg: MutableLiveData<String?> = MutableLiveData()
     val errorMsg: LiveData<String?> = _errorMsg
@@ -25,77 +25,84 @@ class RegisterViewModel : ViewModel() {
     private val _registerSuccess: MutableLiveData<Boolean> = MutableLiveData()
     val registerSuccess: LiveData<Boolean> = _registerSuccess
 
-    fun validateData(email: String, password: String, repeatPassword: String) {
-        if (email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()){
+    fun validateData(
+        email: String,
+        password: String,
+        repeatPassword: String,
+        name: String,
+        lastName: String,
+        cedula: String,
+        programa: String
+    ) {
+        if (email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()) {
             _errorMsg.value = "Debe escribir todos los datos de registro"
             banRegister.value = false
         } else if (password != repeatPassword) {
             _errorMsg.value = "Las contraseñas no coinciden"
             banRegister.value = false
         } else {
-            if (password.length < 6){
+            if (password.length < 6) {
                 _errorMsg.value = "Las contraseña debe tener mínimo 6 dígitos"
-                //banRegister.value = true
-            }
-            else{
-                if(!emailValidator(email)){
+            } else {
+                if (!emailValidator(email)) {
                     _errorMsg.value = "El correo electrónico está mal escrito, revise su formato"
-                }
-                else {
+                } else {
                     viewModelScope.launch {
-                        var result = userRepository.registerUser(email, password)
+                        val result = userRepository.registerUser(email, password)
                         result.let { resourceRemote ->
-                            when (resourceRemote){
+                            when (resourceRemote) {
                                 is ResourceRemote.Success -> {
-                                    var uid = result.data
+                                    val uid = result.data
                                     uid?.let { Log.d("uid User", it) }
-                                    val user = User(uid, email)
+                                    val user = User(
+                                        uid,
+                                        name,
+                                        lastName,
+                                        cedula,
+                                        programa,
+                                        email
+                                    )
                                     createUser(user)
-                                    //_registerSuccess.postValue(true)
-                                    //_errorMsg.postValue("Usuario creado exitosamente")
-                                    //banRegister.value = true
                                 }
                                 is ResourceRemote.Error -> {
                                     var msg = result.message
-                                    when(msg){
-                                       "The email address is already in use by another account."-> msg = "Ya existe una cuenta con ese correo electrónico"
-                                        "A network error (such as timeout, interrupted connection or unreachable host) has occurred." -> msg = "Revise su conexión de red"
+                                    when (msg) {
+                                        "The email address is already in use by another account." -> msg =
+                                            "Ya existe una cuenta con ese correo electrónico"
+                                        "A network error (such as timeout, interrupted connection or unreachable host) has occurred." -> msg =
+                                            "Revise su conexión de red"
                                     }
                                     _errorMsg.postValue(msg)
                                 }
                                 else -> {
-                                    //don't use
+                                    // don't use
                                 }
                             }
                         }
                     }
-
                 }
             }
-
         }
     }
 
     private fun createUser(user: User) {
         viewModelScope.launch {
             val result = userRepository.createUser(user)
-            result.let {resourceRemote ->
-                when(resourceRemote){
-                    is ResourceRemote.Success ->{
+            result.let { resourceRemote ->
+                when (resourceRemote) {
+                    is ResourceRemote.Success -> {
                         _registerSuccess.postValue(true)
                         _errorMsg.postValue("Usuario creado exitosamente")
                     }
-                    is ResourceRemote.Error ->{
+                    is ResourceRemote.Error -> {
                         var msg = result.message
                         _errorMsg.postValue(msg)
                     }
-                    else ->{
-                        //don't use
+                    else -> {
+                        // don't use
                     }
                 }
-
             }
         }
-
     }
 }

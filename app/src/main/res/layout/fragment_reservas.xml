@@ -89,7 +89,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/programa_text_input_layout"
+            android:id="@+id/programa_profile_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -122,7 +122,7 @@
             app:helperText="@string/field"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/programa_text_input_layout">
+            app:layout_constraintTop_toBottomOf="@+id/programa_profile_text_input_layout">
 
             <Spinner
                 android:id="@+id/maquina_spinner"
