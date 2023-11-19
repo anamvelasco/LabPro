@@ -22,12 +22,13 @@
     <string name="historial_text">HISTORIAL DE RESERVAS</string>
     <string name="reserva1_text">Reserva: Máquina 3D\nFecha: 30 de Agosto 2023</string>
     <string name="reserva2_text">Reserva: Máquina Cortadora Láser\nFecha: 12 de Septiembre 2023</string>
-    <string name="name_text">Nombres:\nAna María</string>
-    <string name="lastname_text">Apellidos: \nVelasco Montenegro</string>
-    <string name="programa_text">Programa Académico: \nIngeniería Electrónica</string>
-    <string name="numero_reservas_text">Número de Reservas: \n10</string>
-    <string name="emailp_text">Correo electrónico:\nana.velasco@udea.edu.co</string>
-    <string name="cedula_text">Cédula:\n1152712240</string>
+    <string name="name_text"></string>
+    <string name="lastname_text"></string>
+    <string name="programa_text"></string>
+    <string name="numero_reservas_text"></string>
+    <string name="emailp_text"></string>
+    <string name="cedula_text"></string>
+
     <string name="reservas_title">RESERVAS LABORATORIO DE PROTOTIPADO</string>
     <string name="name_reserva_text">Ingrese su nombre</string>
     <string name="cedula_reserva_text">Ingrese su número de cédula</string>
@@ -53,10 +54,11 @@
     <string name="register_text">Registrarse</string>
     <string name="inicio_text">PROYECTOS</string>
     <string name="field">*Campo obligatorio</string>
-    <string name= "hora_reserva_text">Hora</string>
+    <string name="hora_reserva_text">Hora</string>
     <string name="name_edit_text">Ingrese su nombre</string>
     <string name="last_name_text">Ingrese su apellido</string>
     <string name="cedula_edit_text">Ingrese su cédula</string>
+    <string name="edit_perfil_name_text">Editar Perfil</string>
 
 
     <string-array name="maquina_options">

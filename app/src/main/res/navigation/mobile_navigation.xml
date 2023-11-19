@@ -5,8 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/navigation_homee">
 
-
-
     <fragment
         android:id="@+id/navigation_about"
         android:name="com.ana.labpro.ui.about.AboutFragment"
@@ -26,7 +24,11 @@
         android:id="@+id/navigation_perfil"
         android:name="com.ana.labpro.ui.perfil.PerfilFragment"
         android:label="@string/perfil_name_text"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_perfilFragment_to_editPerfilFragment"
+            app:destination="@id/editPerfilFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_historial"
         android:name="com.ana.labpro.ui.historial.HistorialFragment"
@@ -37,4 +39,10 @@
         android:name="com.ana.labpro.ui.homee.HomeeFragment"
         android:label="Inicio"
         tools:layout="@layout/fragment_homee" />
+
+    <fragment
+        android:id="@+id/editPerfilFragment"
+        android:name="com.ana.labpro.ui.perfil.EditPerfilFragment"
+        android:label="@string/edit_perfil_name_text"
+        tools:layout="@layout/fragment_edit_perfil" />
 </navigation>

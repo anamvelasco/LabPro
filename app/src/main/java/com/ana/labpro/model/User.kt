@@ -6,5 +6,6 @@ data class User(
     var lastnamer:String? = null,
     var identir: String? = null,
     var programar: String? = null,
-    var email: String? = null
+    var email: String? = null,
+    var numReservas: Int = 0
 )

@@ -9,10 +9,13 @@
     <string name="historial_text">HISTORIAL DEL RESERVAS</string>
     <string name="reserva1_text">Reserva: Máquina 3D\nFecha: 30 de Agosto 2023</string>
     <string name="reserva2_text">Reserva: Máquina Cortadora Láser\nFecha: 12 de Septiembre 2023</string>
-    <string name="name_text">Nombre:\nAna María</string>
-    <string name="lastname_text">Apellidos: Velasco Montenegro</string>
-    <string name="numero_reservas_text">Número de Reservas: 10</string>
-    <string name="emailp_text">Correo electrónico:\nana.velasco@udea.edu.co</string>
+    <string name="name_text"></string>
+    <string name="lastname_text"></string>
+    <string name="numero_reservas_text"></string>
+    <string name="emailp_text"></string>
+    <string name="programa_text"></string>
+    <string name="cedula_text"></string>
+
     <string name="reservas_title">RESERVAS LABORATORIO DE PROTOTIPADO</string>
     <string name="name_reserva_text">Ingrese su nombre</string>
     <string name="email_reserva_text">Ingrese su email</string>
