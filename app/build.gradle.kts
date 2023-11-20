@@ -50,10 +50,18 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
     implementation("com.google.firebase:firebase-auth-ktx:22.2.0")
     implementation("com.google.firebase:firebase-firestore:24.9.1")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+
+    //implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.3")
+    //implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.3")
+    //implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.3")
+
+
 
     implementation("org.threeten:threetenbp:1.3.8")
 

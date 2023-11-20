@@ -12,19 +12,18 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.tasks.await
-
+import com.google.firebase.firestore.FieldValue
+import com.google.android.gms.tasks.OnCompleteListener
 
 class UserRepository {
 
     private var auth: FirebaseAuth = Firebase.auth
-
     private var db = Firebase.firestore
+
     suspend fun registerUser(email: String, password: String): ResourceRemote<String?> {
         return try {
             val result = auth.createUserWithEmailAndPassword(email, password).await()
-            //auth.sendPasswordResetEmail(email)
             ResourceRemote.Success(data = result.user?.uid)
-
         } catch (e: FirebaseAuthException) {
             Log.e("Register", e.localizedMessage)
             ResourceRemote.Error(message = e.localizedMessage)
@@ -37,9 +36,7 @@ class UserRepository {
     suspend fun loginUser(email: String, password: String): ResourceRemote<String?> {
         return try {
             val result = auth.signInWithEmailAndPassword(email, password).await()
-            //auth.sendPasswordResetEmail(email)
             ResourceRemote.Success(data = result.user?.uid)
-
         } catch (e: FirebaseAuthException) {
             Log.e("FirebaseAuthError", e.localizedMessage)
             ResourceRemote.Error(message = e.localizedMessage)
@@ -50,15 +47,12 @@ class UserRepository {
             Log.e("FirebaseException", e.localizedMessage)
             ResourceRemote.Error(message = e.localizedMessage)
         }
-
     }
 
     suspend fun createUser(user: User): ResourceRemote<String?> {
         return try {
             user.uid?.let { db.collection("users").document(it).set(user).await() }
-            //auth.sendPasswordResetEmail(email)
             ResourceRemote.Success(data = user?.uid)
-
         } catch (e: FirebaseFirestoreException) {
             Log.e("FirebaseFirestoreError", e.localizedMessage)
             ResourceRemote.Error(message = e.localizedMessage)
@@ -69,7 +63,6 @@ class UserRepository {
             Log.e("FirebaseException", e.localizedMessage)
             ResourceRemote.Error(message = e.localizedMessage)
         }
-
     }
 
     suspend fun loadUser(uid: String): ResourceRemote<User?> {
@@ -93,17 +86,16 @@ class UserRepository {
     suspend fun actualizarUsuario(user: User, uid: String): ResourceRemote<Unit> {
         return try {
             val userMap = mapOf(
-                "namer" to (user.namer ?: ""),
+                "name" to (user.namer ?: ""),  // Corregir aquí de "namer" a "name"
                 "lastnamer" to (user.lastnamer ?: ""),
                 "identir" to (user.identir ?: ""),
                 "programar" to (user.programar ?: ""),
                 "email" to (user.email ?: ""),
-                "numReservas" to user.numReservas, // Asegúrate de actualizar numReservas
-                "uid" to uid // Asegúrate de actualizar uid
+                "numReservas" to user.numReservas,
+                "uid" to uid
             )
 
             db.collection("users").document(uid).update(userMap).await()
-
             ResourceRemote.Success(data = Unit)
         } catch (e: FirebaseFirestoreException) {
             Log.e("FirebaseFirestoreError", e.localizedMessage)
@@ -117,14 +109,12 @@ class UserRepository {
         }
     }
 
-
     suspend fun getUserByEmail(email: String): ResourceRemote<User?> {
         return try {
             val querySnapshot =
                 db.collection("users").whereEqualTo("email", email).get().await()
 
             val user = querySnapshot.toObjects(User::class.java).firstOrNull()
-
             ResourceRemote.Success(data = user)
         } catch (e: FirebaseFirestoreException) {
             Log.e("FirebaseFirestoreError", e.localizedMessage)
@@ -138,5 +128,28 @@ class UserRepository {
         }
     }
 
+    suspend fun incrementarNumReservas(uid: String) {
+        try {
+            val userDocument = db.collection("users").document(uid)
+            val documentSnapshot = userDocument.get().await()
+
+            if (documentSnapshot.exists()) {
+                userDocument.update("numReservas", FieldValue.increment(1))
+                    .addOnCompleteListener(OnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("UserRepository", "Incremento exitoso de numReservas")
+                        } else {
+                            Log.e("UserRepository", "Error al incrementar numReservas: ${task.exception}")
+                        }
+                    })
+            } else {
+                Log.e("UserRepository", "El documento con ID $uid no existe en la colección 'users'")
+            }
+        } catch (e: Exception) {
+            Log.e("UserRepository", "Error al incrementar numReservas: ${e.localizedMessage}")
+            e.printStackTrace()
+            // Manejar errores
+        }
+    }
 
 }

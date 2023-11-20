@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ana.labpro.R
 import com.ana.labpro.databinding.FragmentReservasBinding
+import kotlinx.coroutines.launch  // Agrega esta importación
+import androidx.lifecycle.lifecycleScope
+
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,6 +39,12 @@ class ReservasFragment : Fragment() {
         }
 
         reservasViewModel.createReservaSuccess.observe(viewLifecycleOwner) {
+            if (it) {
+                lifecycleScope.launch {
+                    // Incrementar el número de reservas al realizar una reserva
+                    reservasViewModel.loadCurrentUser()
+                }
+            }
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
@@ -60,18 +69,15 @@ class ReservasFragment : Fragment() {
         val dateTextView = reservasBinding.dateTextView
         val timeTextView = reservasBinding.timeTextView
 
-        // Configura el selector de fechas al hacer clic en el TextView
         dateTextView.setOnClickListener {
             showDatePickerDialog()
         }
 
-        // Configura el selector de horas al hacer clic en el TextView
         timeTextView.setOnClickListener {
             showTimePickerDialog()
         }
 
         reservasBinding.reservasButton.setOnClickListener {
-
             with(reservasBinding) {
                 val name = nameEditText.text.toString()
                 val cedulaText = identiEditText.text.toString()
@@ -90,9 +96,12 @@ class ReservasFragment : Fragment() {
                 }
 
                 if (date != null) {
-                    val dateString =
-                        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date)
-                    reservasViewModel.validateFields(name, cedula, email, programa, maquina, dateString, hour)
+                    val dateString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date)
+
+                    // Llama a validateFields desde un ámbito de coroutine
+                    lifecycleScope.launch {
+                        reservasViewModel.validateFields(name, cedula, email, programa, maquina, dateString, hour)
+                    }
                 } else {
                     showErrorMsg("Formato de fecha incorrecto")
                 }
@@ -111,7 +120,6 @@ class ReservasFragment : Fragment() {
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             DatePickerDialog.OnDateSetListener { view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-                // Aquí se ejecuta cuando el usuario elige una fecha
                 val selectedDate = "$year-${monthOfYear + 1}-$dayOfMonth"
                 reservasBinding.dateTextView.text = selectedDate
             },
@@ -131,13 +139,12 @@ class ReservasFragment : Fragment() {
         val timePickerDialog = TimePickerDialog(
             requireContext(),
             TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                // Aquí se ejecuta cuando el usuario elige una hora
                 val selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
                 reservasBinding.timeTextView.text = selectedTime
             },
             currentHour,
             currentMinute,
-            true // 24 horas
+            true
         )
 
         timePickerDialog.show()
@@ -146,4 +153,5 @@ class ReservasFragment : Fragment() {
     private fun showErrorMsg(msg: String?) {
         Toast.makeText(requireActivity(), msg, Toast.LENGTH_LONG).show()
     }
+
 }
