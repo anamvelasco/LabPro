@@ -21,4 +21,8 @@
     <string name="email_reserva_text">Ingrese su email</string>
     <string name="programa_academico_reserva_text">Ingrese su programa académico</string>
     <string name="reservar_button_text">Reservar</string>
+    <string name="name_view_reserva">Nombre:</string>
+    <string name="maquina_view_reserva">Maquina:</string>
+    <string name="fecha_view_reserva">Fecha</string>
+    <string name="hora_view_reserva">Hora:</string>
 </resources>

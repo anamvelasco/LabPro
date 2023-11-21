@@ -52,4 +52,21 @@ class ReservasRepository {
             ResourceRemote.Error(message = e.localizedMessage)
         }
     }
+
+    suspend fun loadReservas() : ResourceRemote<QuerySnapshot?> {
+        return try {
+            val result = db.collection("reservas").get().await()
+            ResourceRemote.Success(data = result)
+        } catch (e: FirebaseFirestoreException) {
+            Log.e("FirebaseFirestoreError", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseNetworkException) {
+            Log.e("FirebaseNetworkException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseException) {
+            Log.e("FirebaseException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        }
+
+    }
 }

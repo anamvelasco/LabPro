@@ -59,6 +59,13 @@
     <string name="last_name_text">Ingrese su apellido</string>
     <string name="cedula_edit_text">Ingrese su cédula</string>
     <string name="edit_perfil_name_text">Editar Perfil</string>
+    <string name="name_view_reserva">Nombre:</string>
+    <string name="identi_view_reserva">Cedula:</string>
+    <string name="email_view_reserva">Email:</string>
+    <string name="programa_view_reserva">Programa:</string>
+    <string name="maquina_view_reserva">Maquina:</string>
+    <string name="fecha_view_reserva">Fecha</string>
+    <string name="hora_view_reserva">Hora:</string>
 
 
     <string-array name="maquina_options">

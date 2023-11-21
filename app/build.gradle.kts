@@ -57,6 +57,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.9.1")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
 
+
     //implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.3")
     //implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.3")
     //implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.3")

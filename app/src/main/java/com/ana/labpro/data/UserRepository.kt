@@ -86,7 +86,7 @@ class UserRepository {
     suspend fun actualizarUsuario(user: User, uid: String): ResourceRemote<Unit> {
         return try {
             val userMap = mapOf(
-                "name" to (user.namer ?: ""),  // Corregir aquí de "namer" a "name"
+                "namer" to (user.namer ?: ""),
                 "lastnamer" to (user.lastnamer ?: ""),
                 "identir" to (user.identir ?: ""),
                 "programar" to (user.programar ?: ""),
@@ -130,25 +130,18 @@ class UserRepository {
 
     suspend fun incrementarNumReservas(uid: String) {
         try {
-            val userDocument = db.collection("users").document(uid)
-            val documentSnapshot = userDocument.get().await()
-
-            if (documentSnapshot.exists()) {
-                userDocument.update("numReservas", FieldValue.increment(1))
-                    .addOnCompleteListener(OnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Log.d("UserRepository", "Incremento exitoso de numReservas")
-                        } else {
-                            Log.e("UserRepository", "Error al incrementar numReservas: ${task.exception}")
-                        }
-                    })
-            } else {
-                Log.e("UserRepository", "El documento con ID $uid no existe en la colección 'users'")
+            val userDocument = db.collection("users").document(auth.uid!!)
+            userDocument.get().addOnSuccessListener {documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    userDocument.update("numReservas", FieldValue.increment(1))
+                } else {
+                    Log.e("UserRepository", "El documento con ID $uid no existe en la colección 'users'")
+                }
             }
+
         } catch (e: Exception) {
-            Log.e("UserRepository", "Error al incrementar numReservas: ${e.localizedMessage}")
+            Log.e("UserRepository2", "Error al incrementar numReservas: ${e.localizedMessage}")
             e.printStackTrace()
-            // Manejar errores
         }
     }
 

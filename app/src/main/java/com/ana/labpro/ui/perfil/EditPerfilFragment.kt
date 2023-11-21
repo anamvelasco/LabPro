@@ -63,7 +63,7 @@ class EditPerfilFragment : Fragment() {
             numReservas = currentUser?.numReservas ?: 0
         )
 
-        // Imprimir los datos
+
         Log.d("EditPerfilFragment", "Datos editados: $editedUser")
 
         return editedUser
@@ -76,7 +76,7 @@ class EditPerfilFragment : Fragment() {
     }
 
     private fun guardarDatosEditados(user: User) {
-        Log.d("EditPerfilFragment", "Guardando datos editados: $user") // Agregar esta línea
+        Log.d("EditPerfilFragment", "Guardando datos editados: $user")
         perfilViewModel.actualizarUsuario(user)
         // Navegar hacia atrás en la pila de fragmentos
         findNavController().navigateUp()
