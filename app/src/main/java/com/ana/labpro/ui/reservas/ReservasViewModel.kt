@@ -26,6 +26,9 @@ class ReservasViewModel : ViewModel() {
     private val _reservasList: MutableLiveData<List<Reservas>> = MutableLiveData()
     val reservasList: LiveData<List<Reservas>> = _reservasList
 
+    private val _newReserva: MutableLiveData<Reservas> = MutableLiveData()
+    val newReserva: LiveData<Reservas> = _newReserva
+
     suspend fun validateFields(
         name: String,
         cedula: Int,
@@ -63,6 +66,9 @@ class ReservasViewModel : ViewModel() {
 
                             // Cargar el usuario después de actualizar las reservas
                             loadCurrentUser()
+
+                            // Después de validar y crear la reserva, actualiza la lista de reservas
+                            _newReserva.postValue(reserva)
                         }
                         is ResourceRemote.Error -> {
                             var msg = result.message
@@ -76,6 +82,7 @@ class ReservasViewModel : ViewModel() {
             }
         }
     }
+
 
 
     fun getReservasByUserEmail(email: String) {
@@ -109,4 +116,5 @@ class ReservasViewModel : ViewModel() {
             }
         }
     }
+
 }

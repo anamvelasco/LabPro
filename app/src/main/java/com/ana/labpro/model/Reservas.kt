@@ -8,5 +8,6 @@ data class Reservas(
     var programa: String? = null,
     var maquina: String? = null,
     var date: String? = null,
-    var hour: String? = null
+    var hour: String? = null,
+    var uid: String? = null
 )

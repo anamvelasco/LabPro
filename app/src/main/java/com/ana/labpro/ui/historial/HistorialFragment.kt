@@ -45,7 +45,14 @@ class HistorialFragment : Fragment() {
             tuAdapterDeReservas.appendItems(reservasList)
         }
 
-        tuAdapterDeReservas = TuAdapterDeReservas(reservasList, onItemClicked = {onReservaItemClicked(it)})
+        historialViewModel.reservaErased.observe(viewLifecycleOwner){
+            //reservasList.clear()
+            historialViewModel.loadReservas()
+        }
+
+        tuAdapterDeReservas = TuAdapterDeReservas(reservasList, onItemClicked = {onReservaItemClicked(it)}, onItemLongClicked = {
+            onReservaLongItemClicked(it)
+        })
 
 
         historialBinding.reservasRecyclerView.apply {
@@ -55,6 +62,11 @@ class HistorialFragment : Fragment() {
         }
 
         return view
+
+    }
+
+    private fun onReservaLongItemClicked(reserva: Reservas?) {
+        historialViewModel.deleteReserva(reserva)
 
     }
 

@@ -13,6 +13,7 @@ import com.ana.labpro.databinding.CardViewReservaItemBinding
 class TuAdapterDeReservas (
     private val reservasList : MutableList<Reservas?>,
     private val onItemClicked : (Reservas?) -> Unit,
+    private val onItemLongClicked: (Reservas?) -> Unit,
 ): RecyclerView.Adapter <TuAdapterDeReservas.HistorialViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistorialViewHolder {
@@ -25,6 +26,10 @@ class TuAdapterDeReservas (
         val reserva = reservasList[position]
         holder.bind(reserva)
         holder.itemView.setOnClickListener { onItemClicked(reserva)}
+        holder.itemView.setOnLongClickListener{
+            onItemLongClicked(reserva)
+            true
+        }
     }
 
     fun appendItems(newList: MutableList<Reservas?>){
