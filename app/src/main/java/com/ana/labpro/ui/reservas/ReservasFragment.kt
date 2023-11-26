@@ -139,8 +139,18 @@ class ReservasFragment : Fragment() {
         val timePickerDialog = TimePickerDialog(
             requireContext(),
             TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                val selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
-                reservasBinding.timeTextView.text = selectedTime
+                if (hourOfDay in 8..17) {
+                    if (minute == 0) {
+                        val selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
+                        reservasBinding.timeTextView.text = selectedTime
+                    } else {
+                        // Muestra un mensaje indicando que las horas deben ser en punto
+                        Toast.makeText(requireContext(), "Las horas deben ser en punto", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    // Muestra un mensaje indicando el rango permitido de horas
+                    Toast.makeText(requireContext(), "Selecciona una hora entre 8:00 y 17:00", Toast.LENGTH_SHORT).show()
+                }
             },
             currentHour,
             currentMinute,
@@ -149,6 +159,9 @@ class ReservasFragment : Fragment() {
 
         timePickerDialog.show()
     }
+
+
+
 
     private fun showErrorMsg(msg: String?) {
         Toast.makeText(requireActivity(), msg, Toast.LENGTH_LONG).show()
