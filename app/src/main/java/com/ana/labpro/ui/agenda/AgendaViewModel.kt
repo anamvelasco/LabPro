@@ -51,21 +51,21 @@ class AgendaViewModel: ViewModel() {
 
     }
 
-    fun deleteReserva(reserva: Reservas?) {
+    fun deleteReservaConValidacionDeRol(reserva: Reservas?) {
         viewModelScope.launch {
-            val result = reservasRepository.deleteReserva(reserva)
+            val result = reservasRepository.deleteReservaConValidacionDeRol(reserva)
             result.let { resourceRemote ->
-                when(resourceRemote){
-                    is ResourceRemote.Success ->{
+                when (resourceRemote) {
+                    is ResourceRemote.Success -> {
                         _reservaErased.postValue(true)
-                        _errorMsg.postValue("Reserva eliminada con exito")
+                        _errorMsg.postValue("Reserva eliminada con éxito")
                     }
                     is ResourceRemote.Error -> {
                         val msg = result.message
                         _errorMsg.postValue(msg)
                     }
                     else -> {
-                        //don't use
+                        // no se utiliza
                     }
                 }
             }

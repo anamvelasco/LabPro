@@ -3,6 +3,7 @@ package com.ana.labpro.data
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.ana.labpro.model.Reservas
+import com.ana.labpro.model.User
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseNetworkException
@@ -111,5 +112,36 @@ class ReservasRepository {
             ResourceRemote.Error(message = e.localizedMessage)
         }
     }
+
+    suspend fun deleteReservaConValidacionDeRol(reserva: Reservas?): ResourceRemote<String?> {
+        return try {
+            val currentUserDocument = db.collection("users").document(auth.uid ?: "").get().await()
+            val currentUser = currentUserDocument.toObject(User::class.java)
+
+            if (currentUser != null) {
+                if (currentUser.role == "admin" || currentUser.uid == reserva?.uid) {
+                    // El usuario tiene permisos para eliminar la reserva
+                    val result = reserva?.id?.let { db.collection("reservas").document(it).delete().await() }
+                    ResourceRemote.Success(data = reserva?.id)
+                } else {
+                    // El usuario no tiene permisos
+                    ResourceRemote.Error(message = "No tienes permisos para eliminar esta reserva.")
+                }
+            } else {
+                // No se pudo obtener el usuario actual
+                ResourceRemote.Error(message = "No se pudo obtener la información del usuario actual.")
+            }
+        } catch (e: FirebaseFirestoreException) {
+            Log.e("FirebaseFirestoreError", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseNetworkException) {
+            Log.e("FirebaseNetworkException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseException) {
+            Log.e("FirebaseException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        }
+    }
+
 
 }

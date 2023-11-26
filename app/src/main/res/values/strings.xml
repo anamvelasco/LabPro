@@ -30,7 +30,7 @@
     <string name="cedula_text"></string>
 
     <string name="reservas_title">RESERVAS LABORATORIO DE PROTOTIPADO</string>
-    <string name="name_reserva_text">Ingrese su nombre</string>
+    <string name="name_reserva_text">Ingrese su nombre completo</string>
     <string name="cedula_reserva_text">Ingrese su número de cédula</string>
     <string name="email_reserva_text">Ingrese su email</string>
     <string name="programa_academico_reserva_text">Ingrese su programa académico</string>

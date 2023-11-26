@@ -9,7 +9,7 @@ import com.ana.labpro.ui.login.LoginActivity
 
 class Splash : AppCompatActivity() {
 
-    private val splashTimeOut: Long = 2000
+    private val splashTimeOut: Long = 1000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)

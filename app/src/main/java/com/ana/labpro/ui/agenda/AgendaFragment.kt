@@ -21,7 +21,7 @@ class AgendaFragment : Fragment() {
     private lateinit var agendaBinding: FragmentAgendaBinding
     private lateinit var agendaViewModel: AgendaViewModel
     private lateinit var agendaAdapter: AgendaAdapter
-    private lateinit var fecha: String
+    private var fecha: String = ""
     private var reservasList = mutableListOf<Reservas?>()
 
     override fun onCreateView(
@@ -94,7 +94,7 @@ class AgendaFragment : Fragment() {
     }
 
     private fun onReservaLongItemClicked(reserva: Reservas?) {
-        agendaViewModel.deleteReserva(reserva)
+        agendaViewModel.deleteReservaConValidacionDeRol(reserva)
 
     }
 

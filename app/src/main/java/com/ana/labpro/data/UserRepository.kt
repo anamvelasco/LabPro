@@ -13,7 +13,6 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.tasks.await
 import com.google.firebase.firestore.FieldValue
-import com.google.android.gms.tasks.OnCompleteListener
 
 class UserRepository {
 

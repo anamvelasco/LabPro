@@ -60,7 +60,8 @@ class RegisterViewModel : ViewModel() {
                                         lastName,
                                         cedula,
                                         programa,
-                                        email
+                                        email,
+                                        role = "user"
                                     )
                                     createUser(user)
                                 }

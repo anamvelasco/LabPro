@@ -43,12 +43,12 @@ class PerfilFragment : Fragment() {
 
         perfilViewModel.userData.observe(viewLifecycleOwner) { user ->
             user?.let {
-                binding.nameTextView.text = it.namer
-                binding.lastNameTextView.text = it.lastnamer
-                binding.identiTextView.text = it.identir
-                binding.programaTextView.text = it.programar
-                binding.emailTextView.text = it.email
-                binding.numreservasTextView.text = it.numReservas.toString()
+                binding.nameTextView.text = "Nombre: ${user.namer}"
+                binding.lastNameTextView.text = "Apellido: ${user.lastnamer}"
+                binding.identiTextView.text = "Cédula: ${user.identir}"
+                binding.programaTextView.text = "Programa: ${user.programar}"
+                binding.emailTextView.text = "Email: ${user.email}"
+                binding.numreservasTextView.text = "Numero de Reservas: ${user.numReservas.toString()}" 
             }
         }
 
