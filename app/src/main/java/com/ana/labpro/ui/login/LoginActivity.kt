@@ -3,6 +3,9 @@ package com.ana.labpro.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ana.labpro.databinding.ActivityLoginBinding
@@ -13,6 +16,11 @@ import com.google.android.material.snackbar.Snackbar
 class LoginActivity : AppCompatActivity() {
     private lateinit var activityLoginBinding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+
+
+    private val _errorMsg: MutableLiveData<String?> = MutableLiveData()
+    val errorMsg: MutableLiveData<String?> = _errorMsg
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
@@ -51,6 +59,23 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        loginViewModel.verifyUser()
 
+        loginViewModel.errorMsg.observe(this){msg ->
+            showErrorMsg(msg)
+        }
+
+        /*
+
+        loginViewModel.userLoggedIn.observe(this){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }*/
+
+    }
+
+    private fun showErrorMsg(msg: String?){
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 }

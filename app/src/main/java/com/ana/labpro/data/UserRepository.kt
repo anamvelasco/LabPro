@@ -144,4 +144,37 @@ class UserRepository {
         }
     }
 
+    suspend fun verifyUser(): ResourceRemote<Boolean> {
+        return try {
+            val userLoaded = auth.currentUser != null
+            ResourceRemote.Success(data = userLoaded)
+        } catch (e: FirebaseAuthException) {
+            Log.e("FirebaseAuthError", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseNetworkException) {
+            Log.e("FirebaseNetworkException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseException) {
+            Log.e("FirebaseException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        }
+    }
+
+    fun signOut():ResourceRemote<Boolean> {
+        return try {
+        auth.signOut()
+        ResourceRemote.Success(data = true)
+        } catch (e: FirebaseAuthException) {
+            Log.e("FirebaseAuthError", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseNetworkException) {
+            Log.e("FirebaseNetworkException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseException) {
+            Log.e("FirebaseException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        }
+
+    }
+
 }

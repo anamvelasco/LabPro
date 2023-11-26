@@ -1,5 +1,6 @@
 package com.ana.labpro.ui.perfil
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ana.labpro.R
 import com.ana.labpro.databinding.FragmentPerfilBinding
+import com.ana.labpro.ui.login.LoginActivity
 
 class PerfilFragment : Fragment() {
 
     private lateinit var perfilViewModel: PerfilViewModel
     private lateinit var binding: FragmentPerfilBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +35,25 @@ class PerfilFragment : Fragment() {
         binding.editButton.setOnClickListener {
             abrirFragmentoEdicion()
         }
-
         observeViewModel()
+
+
+        perfilViewModel.errorMsg.observe(viewLifecycleOwner) { msg ->
+            showErrorMsg(msg)
+        }
+
+
+        perfilViewModel.userLoggedOut.observe(viewLifecycleOwner) {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
+
+        binding.logOutButton.setOnClickListener {
+            perfilViewModel.signOut()
+        }
     }
+
 
     private fun observeViewModel() {
         perfilViewModel.errorMsg.observe(viewLifecycleOwner) { msg ->

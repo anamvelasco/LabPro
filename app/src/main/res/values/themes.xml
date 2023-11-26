@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.LabPro" parent="Theme.Material3.DayNight">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/ic_logo_launcher_background</item>
+        <item name="colorPrimary">#026937</item>
     </style>
 
     <style name="Theme.LabPro" parent="Base.Theme.LabPro" />

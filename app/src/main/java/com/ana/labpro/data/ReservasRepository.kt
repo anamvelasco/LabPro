@@ -143,5 +143,29 @@ class ReservasRepository {
         }
     }
 
+    suspend fun loadReservasByDateAndHour(date: String, hour: String, maquina: String): ResourceRemote<List<Reservas>> {
+        return try {
+            val result = db.collection("reservas")
+                .whereEqualTo("date", date)
+                .whereEqualTo("hour", hour)
+                .whereEqualTo("maquina", maquina)
+                .get()
+                .await()
+
+            val reservasList = result.toObjects(Reservas::class.java)
+            ResourceRemote.Success(data = reservasList)
+        } catch (e: FirebaseFirestoreException) {
+            Log.e("FirebaseFirestoreError", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseNetworkException) {
+            Log.e("FirebaseNetworkException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        } catch (e: FirebaseException) {
+            Log.e("FirebaseException", e.localizedMessage)
+            ResourceRemote.Error(message = e.localizedMessage)
+        }
+    }
+
+
 
 }

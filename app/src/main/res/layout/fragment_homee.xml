@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#20C827"
-    tools:context=".ui.homee.HomeeFragment" >
+    android:background="#8dc63f"
+    tools:context=".ui.homee.HomeeFragment">
 
     <TextView
         android:id="@+id/inicio_textview"

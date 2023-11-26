@@ -35,7 +35,12 @@ class NavigationDrawerActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_homee,R.id.navigation_about, R.id.navigation_horario, R.id.navigation_reservas, R.id.navigation_perfil, R.id.navigation_perfil
+                R.id.navigation_homee,
+                R.id.navigation_about,
+                R.id.navigation_horario,
+                R.id.navigation_reservas,
+                R.id.navigation_perfil,
+                R.id.navigation_perfil
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -43,11 +48,6 @@ class NavigationDrawerActivity : AppCompatActivity() {
     }
 
     //Los tres puntos
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.navigation_drawer, menu)
-        return true
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_navigation_drawer)

@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.ana.labpro.data.ResourceRemote
 import com.ana.labpro.data.UserRepository
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.launch
 
 class ReservasViewModel : ViewModel() {
@@ -28,6 +29,8 @@ class ReservasViewModel : ViewModel() {
 
     private val _newReserva: MutableLiveData<Reservas> = MutableLiveData()
     val newReserva: LiveData<Reservas> = _newReserva
+
+
 
     suspend fun validateFields(
         name: String,
@@ -82,6 +85,11 @@ class ReservasViewModel : ViewModel() {
             }
         }
     }
+
+    suspend fun loadReservasByDateAndHour(date: String, hour: String, maquina: String): ResourceRemote<List<Reservas>> {
+        return reservasRepository.loadReservasByDateAndHour(date, hour, maquina)
+    }
+
 
 
 

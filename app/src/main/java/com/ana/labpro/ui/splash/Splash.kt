@@ -1,4 +1,4 @@
-package com.ana.labpro.ui
+package com.ana.labpro.ui.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -27,5 +27,12 @@ class Splash : AppCompatActivity() {
             }
         }
         )
+
+
+
+
     }
+
+
+
 }

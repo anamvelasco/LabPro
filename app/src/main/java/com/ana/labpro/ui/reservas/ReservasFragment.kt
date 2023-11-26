@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.ImageView
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,10 +17,15 @@ import com.ana.labpro.R
 import com.ana.labpro.databinding.FragmentReservasBinding
 import kotlinx.coroutines.launch  // Agrega esta importación
 import androidx.lifecycle.lifecycleScope
-
+import com.ana.labpro.data.ResourceRemote
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import com.google.android.material.snackbar.Snackbar
+
+
 
 class ReservasFragment : Fragment() {
 
@@ -92,25 +98,42 @@ class ReservasFragment : Fragment() {
                 val dateText = dateTextView.text.toString()
                 val hour = timeTextView.text.toString()
 
-                // Intenta convertir la fecha a Date
-                val date = try {
-                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateText)
-                } catch (e: ParseException) {
-                    null // Maneja el error de conversión de fecha
-                }
+                if (name.isNotEmpty() && cedulaText.isNotEmpty() && email.isNotEmpty() && dateText.isNotEmpty() && hour.isNotEmpty()) {
+                    // Todos los campos están llenos, procede con la lógica de reserva
 
-                if (date != null) {
-                    val dateString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date)
+                    // Intenta convertir la fecha a Date
+                    val date = try {
+                        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateText)
+                    } catch (e: ParseException) {
+                        null // Maneja el error de conversión de fecha
+                    }
 
-                    // Llama a validateFields desde un ámbito de coroutine
-                    lifecycleScope.launch {
-                        reservasViewModel.validateFields(name, cedula, email, programa, maquina, dateString, hour)
+                    if (date != null) {
+                        val dateString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date)
+
+                        // Llama a loadReservasByDateAndHour para verificar si ya existe una reserva
+                        lifecycleScope.launch {
+                            val existingReservas = reservasViewModel.loadReservasByDateAndHour(dateString, hour, maquina)
+                            val data = existingReservas.data
+                            if (existingReservas is ResourceRemote.Success && data != null && data.isNotEmpty()) {
+                                // Ya existe una reserva en la misma fecha, hora y máquina
+                                showErrorMsg("Ya existe una reserva en la misma fecha, hora y máquina.")
+                            } else {
+                                // No hay reserva existente, continúa con la creación de la reserva
+                                reservasViewModel.validateFields(name, cedula, email, programa, maquina, dateString, hour)
+                            }
+                        }
+                    } else {
+                        showErrorMsg("Formato de fecha incorrecto")
                     }
                 } else {
-                    showErrorMsg("Formato de fecha incorrecto")
+                    // Al menos un campo está vacío, muestra un mensaje de error
+                    showErrorMsg("Por favor, completa todos los campos.")
                 }
             }
         }
+
+
 
         return view
     }
@@ -181,7 +204,20 @@ class ReservasFragment : Fragment() {
 
 
     private fun showErrorMsg(msg: String?) {
-        Toast.makeText(requireActivity(), msg, Toast.LENGTH_LONG).show()
+        val snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), msg ?: "", Snackbar.LENGTH_LONG)
+        val snackbarView = snackbar.view
+
+        // Personaliza el fondo
+        snackbarView.setBackgroundColor(resources.getColor(R.color.white)) // Asegúrate de tener un color blanco en tus recursos
+
+        // Personaliza el texto del mensaje
+        val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        textView.setTextColor(resources.getColor(R.color.white)) // Asegúrate de tener tu color de texto personalizado en tus recursos
+
+        snackbar.show()
     }
+
+
+
 
 }

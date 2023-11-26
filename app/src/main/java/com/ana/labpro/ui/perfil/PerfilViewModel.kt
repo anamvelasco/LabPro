@@ -21,6 +21,9 @@ class PerfilViewModel : ViewModel() {
     private val _userData: MutableLiveData<User?> = MutableLiveData()
     val userData: LiveData<User?> = _userData
 
+    private val _userLoggedOut: MutableLiveData<Boolean> = MutableLiveData()
+    val userLoggedOut: LiveData<Boolean> = _userLoggedOut
+
     fun loadCurrentUser() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         currentUser?.uid?.let { uid ->
@@ -85,6 +88,43 @@ class PerfilViewModel : ViewModel() {
             }
         } ?: run {
             _errorMsg.postValue("El usuario actual no tiene un UID válido al intentar actualizar.")
+        }
+    }
+
+    fun signOut() {
+        viewModelScope.launch {
+            val result = userRepository.signOut()
+            result.let { resourceRemote ->
+                when (resourceRemote) {
+                    is ResourceRemote.Success -> {
+                        if (result.data == true) {
+                            _userLoggedOut.postValue(true)
+                        }
+                    }
+
+                    is ResourceRemote.Error -> {
+                        var msg = result.message
+                        when (msg) {
+                            "A network error (such as timeout, interrupted connection or unreachable host) has occurred." -> {
+                                msg = "Revise su conexión de red al verificar el usuario"
+                            }
+
+                            "An internal error has occurred." -> {
+                                msg = "Error interno al verificar el usuario"
+                            }
+
+                            else -> {
+                                // Puedes agregar más casos según sea necesario
+                            }
+                        }
+                        _errorMsg.postValue(msg!!)
+                    }
+
+                    else -> {
+                        // No uses este caso si no es necesario
+                    }
+                }
+            }
         }
     }
 

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.LabPro"
         tools:targetApi="31">
         <activity
-            android:name=".ui.Splash"
+            android:name=".ui.splash.Splash"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

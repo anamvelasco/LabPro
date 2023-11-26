@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#20C827"
+    android:background="#35944b"
     tools:context=".ui.reservas.ReservasFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,10 +90,10 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:entries="@array/programa_options"
                 android:hint="@string/programa_academico_reserva_text"
-                android:entries="@array/programa_options" />
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -115,10 +114,10 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:entries="@array/maquina_options"
                 android:hint="@string/maquina_reserva_text"
-                android:entries="@array/maquina_options" />
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -137,10 +136,10 @@
                 android:id="@+id/date_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="@string/fecha_reserva_text"
-                android:padding="16dp"
                 android:clickable="true"
-                android:focusable="false" />
+                android:focusable="false"
+                android:hint="@string/fecha_reserva_text"
+                android:padding="16dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,10 +159,10 @@
                 android:id="@+id/time_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hora_reserva_text"
-                android:padding="16dp"
                 android:clickable="true"
-                android:focusable="false" />
+                android:focusable="false"
+                android:hint="@string/hora_reserva_text"
+                android:padding="16dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

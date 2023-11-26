@@ -67,6 +67,7 @@
     <string name="fecha_view_reserva">Fecha</string>
     <string name="hora_view_reserva">Hora:</string>
     <string name="agenda_text">Texto para tu agenda</string>
+    <string name="log_out_text">Cerrar sesión</string>
 
 
     <string-array name="maquina_options">
