@@ -81,7 +81,11 @@ class ReservasFragment : Fragment() {
             with(reservasBinding) {
                 val name = nameEditText.text.toString()
                 val cedulaText = identiEditText.text.toString()
-                val cedula = if (cedulaText.isNotEmpty()) cedulaText.toInt() else 0
+                val cedula = try {
+                    if (cedulaText.isNotEmpty()) cedulaText.toInt() else 0
+                } catch (e: NumberFormatException) {
+                    0
+                }
                 val email = email2EditText.text.toString()
                 val programa = programaSpinner.selectedItem.toString()
                 val maquina = maquinaSpinner.selectedItem.toString()
@@ -119,9 +123,14 @@ class ReservasFragment : Fragment() {
 
         val datePickerDialog = DatePickerDialog(
             requireContext(),
-            DatePickerDialog.OnDateSetListener { view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 val selectedDate = "$year-${monthOfYear + 1}-$dayOfMonth"
-                reservasBinding.dateTextView.text = selectedDate
+                if (isWeekday(year, monthOfYear, dayOfMonth)) {
+                    reservasBinding.dateTextView.text = selectedDate
+                } else {
+                    // Muestra un mensaje indicando que el horario es de lunes a viernes
+                    Toast.makeText(requireContext(), "El horario es de lunes a viernes", Toast.LENGTH_SHORT).show()
+                }
             },
             currentYear,
             currentMonth,
@@ -130,6 +139,14 @@ class ReservasFragment : Fragment() {
 
         datePickerDialog.show()
     }
+
+    private fun isWeekday(year: Int, month: Int, day: Int): Boolean {
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, day)
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+        return dayOfWeek >= Calendar.MONDAY && dayOfWeek <= Calendar.FRIDAY
+    }
+
 
     private fun showTimePickerDialog() {
         val calendar = Calendar.getInstance()
