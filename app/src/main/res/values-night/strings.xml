@@ -26,4 +26,5 @@
     <string name="fecha_view_reserva">Fecha</string>
     <string name="hora_view_reserva">Hora:</string>
     <string name="log_out_text">Cerrar sesión</string>
+    <string name="forgot_edit_text">¿Olvidaste tu contraseña?</string>
 </resources>

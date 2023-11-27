@@ -68,6 +68,13 @@
     <string name="hora_view_reserva">Hora:</string>
     <string name="agenda_text">Texto para tu agenda</string>
     <string name="log_out_text">Cerrar sesión</string>
+    <string name="selec_image">Seleccionar Imagen</string>
+    <string name="descripcion_gallery_text">Descripción</string>
+    <string name="createGallery_edit_text">Crear Galería</string>
+    <string name="galeria_name">Nombre de la galería</string>
+    <string name="url_edit_text">URL de la imágen\n</string>
+    <string name="forgot_edit_text">¿Olvidaste tu contraseña?</string>
+    <string name="save_edit_text">Guardar</string>
 
 
     <string-array name="maquina_options">

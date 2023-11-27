@@ -162,8 +162,8 @@ class UserRepository {
 
     fun signOut():ResourceRemote<Boolean> {
         return try {
-        auth.signOut()
-        ResourceRemote.Success(data = true)
+            auth.signOut()
+            ResourceRemote.Success(data = true)
         } catch (e: FirebaseAuthException) {
             Log.e("FirebaseAuthError", e.localizedMessage)
             ResourceRemote.Error(message = e.localizedMessage)

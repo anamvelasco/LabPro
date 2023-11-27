@@ -67,7 +67,7 @@ class PerfilFragment : Fragment() {
                 binding.identiTextView.text = "Cédula: ${user.identir}"
                 binding.programaTextView.text = "Programa: ${user.programar}"
                 binding.emailTextView.text = "Email: ${user.email}"
-                binding.numreservasTextView.text = "Numero de Reservas: ${user.numReservas.toString()}" 
+                binding.numreservasTextView.text = "Numero de Reservas: ${user.numReservas.toString()}"
             }
         }
 
